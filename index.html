@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue示例</title>
+    <script src="js/vue.js" type="text/javascript" charset="UTF-8"></script>
+</head>
+<body>
+    <div id="app">
+        <h3>学生列表（带索引值）</h3>
+        <ul>
+            <li v-for="value,key in students">
+                <h4>索引值:{{key}}---学生名字:{{value.studentName}}</h4>
+                <p>年龄:{{value.age}}---学校:{{value.school}}</p>
+            </li>
+        </ul>
+
+
+        <h3>循环对象</h3>
+        <ul>
+            <li v-for='item in students[0]'>
+                {{item}}
+            </li>
+        </ul>
+
+
+        <h3>条件+渲染循环（把偶数年龄的学生渲染出来）</h3>
+        <ol>
+            <!-- 冒号是动态绑定v-bind 普通字符串不用加 -->
+            <li v-for="value,key in students" v-if="value.age%2==0" :key="key">
+                <h4>索引值:{{key}}---学生名字:{{value.studentName}}</h4>
+                <p>年龄:{{value.age}}---学校:{{value.school}}</p>
+            </li>
+        </ol>
+
+        
+        <div v-if="isLogin">
+            <h3>login</h3>
+            <input type="text" name="username" value="" placeholder="请输入用户名"/>
+        </div>
+        <div v-else>
+            <h3>register</h3>
+            <input type="text" name="username" value="" placeholder="请注册"/>
+        </div>
+
+        <button @click="togglePage" type="button">切换登录注册页面</button>
+
+        <!-- <img :src="students[0].imgHeader"> -->
+    </div>
+    
+    <script type="text/javascript">
+        var app=new Vue({
+            el:"#app",
+            data:{
+                stars:['ab','luhan','dengchao'],
+                students:[
+                    {
+                        studentName:"小明",
+                        age:16,
+                        school:'南审',
+                        imgHeader:"http://img.mp.itc.cn/upload/20170724/cf678e09eb384401aa616ba134126357_th.jpg"
+                    },
+                    {
+                        studentName:'小黑',
+                        age:17,
+                        school:'南理'
+                    },
+                    {
+                        studentName:'小明',
+                        age:18,
+                        school:'南航'
+                    },
+                    {
+                        studentName:'小黄',
+                        age:19,
+                        school:'南林'
+                    },
+                ],
+                isLogin: false
+                
+            },
+            methods:{
+                    togglePage: ()=>{
+                        // console.log(this)
+                        app.isLogin=!app.isLogin
+                    }
+            }
+
+        })
+    </script>
+</body>
+
+
+</html>

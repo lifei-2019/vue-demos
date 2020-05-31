@@ -47,6 +47,13 @@
         <button @click="togglePage" type="button">切换登录注册页面</button>
 
         <!-- <img :src="students[0].imgHeader"> -->
+
+        <ul>
+            <li v-for="item,index in oddStudents">
+                <h3>{{item.studentName}}</h3>
+                <h3>{{item.age}}</h3>
+            </li>
+        </ul>
     </div>
     
     <script type="text/javascript">
@@ -85,6 +92,13 @@
                         // console.log(this)
                         app.isLogin=!app.isLogin
                     }
+            },
+            computed:{
+                oddStudents:function(){
+                    return this.students.filter((item,index)=>{
+                        return item.age%2==0
+                    })
+                }
             }
 
         })

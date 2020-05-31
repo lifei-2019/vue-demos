@@ -42,6 +42,11 @@
         </div>
         <!-- 事件的绑定 -->
         <button @click="changeBg">改变背景颜色</button>
+        <!-- 计算属性 反复变化时减少计算量-->
+        <h1>{{fullName}}</h1>
+        <!-- 逆序显示一个单词 -->
+        <h1>{{reverseWord}}</h1>
+
     </div>
 
     <script>
@@ -53,12 +58,21 @@
                 idname:"login",
                 firstName:"zhang",
                 lastName:"san",
-                isVip:true
-                
+                isVip:true,
+                word:"music"
             },
             methods:{
                 changeBg:()=> {
                     document.body.style.background="skyblue"
+                }
+            },
+            computed:{
+                fullName:function(){
+                    // 会将计算的结果进行缓存，只要firstName内容不改变，久久不会重新计算
+                    return this.firstName+this.lastName
+                },
+                reverseWord:function(){
+                    return this.word.split("").reverse().join("")
                 }
             }
         })

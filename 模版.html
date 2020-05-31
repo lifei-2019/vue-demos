@@ -24,9 +24,24 @@
         <!-- 插入html内容 -->
         <h1 v-html="htmlTxt"></h1>
         <!-- 修改属性内容 -->
+        <!-- 绑定动态属性，全写 -->
+        <div v-bind:id="idname">
+            <h1>登录</h1>
+        </div>
+        <!-- 绑定动态属性，省略 -->
         <div :id="idname">
             <h1>登录</h1>
         </div>
+        <!-- 模版语言的表达式应用 -->
+        <div>
+            {{firstName+lastName}}
+        </div>
+        <!-- 三元运算符 -->
+        <div>
+            {{isVip ? "wlcome" : "no"}}
+        </div>
+        <!-- 事件的绑定 -->
+        <button @click="changeBg">改变背景颜色</button>
     </div>
 
     <script>
@@ -35,7 +50,16 @@
             data:{
                 msg:"hello world",
                 htmlTxt:'<span>hello lifei</span>',
-                idname:"login"
+                idname:"login",
+                firstName:"zhang",
+                lastName:"san",
+                isVip:true
+                
+            },
+            methods:{
+                changeBg:()=> {
+                    document.body.style.background="skyblue"
+                }
             }
         })
     </script>

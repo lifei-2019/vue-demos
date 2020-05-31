@@ -25,7 +25,7 @@
         </ul>
 
 
-        <h3>条件+渲染循环（把偶数年龄的学生渲染出来）</h3>
+        <h3>条件+列表渲染循环（把偶数年龄的学生渲染出来）</h3>
         <ol>
             <!-- 冒号是动态绑定v-bind 普通字符串不用加 -->
             <li v-for="value,key in students" v-if="value.age%2==0" :key="key">

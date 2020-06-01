@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>内联样式</title>
+
+        <style type="text/css">
+
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing:border-box
+            }
+            .page{
+                width: 100vw;
+                height:100vh;
+                background-color: #efefef;
+            }
+            .rMenu{
+                width: 50vw;
+                height:100vh;
+                position: fixed;
+                left: 0;
+                top: 0;
+                transform: translateX(100vw);
+                background-color: skyblue;
+                transition: transform 0.5s;
+            }
+            .active{
+                transform: translateX(50vw);
+            }
+        </style>
+
+        <script src="js/vue.js" type="text/javascript" charset="UTF-8"></script>
+    </head>
+    <body>
+        <div id="app">
+
+            <div class="page">
+                首页
+                <button @click="toggleMenu" type="button">切换侧边栏</button>
+            </div>
+            <div class="rMenu" :class="{active:isShow}">
+                侧边栏
+            </div>
+
+
+
+            <div style="width: 100px;background: skyblue;"></div>
+            <!-- CSS内联样式变量拼接 -->
+            <div style="width: 100px;background: skyblue;"
+                :style="{border: borderWidth + 'px solid red' ,padding: paddingWidth + 'px'}"></div>
+            <!-- CSS内联样式放置对象 -->
+            <div :style="styleObj"></div>
+            <!-- 数组方式 -->
+            <div :style="styleArr"></div>
+        </div>
+
+
+        <script>
+            var app=new Vue({
+                el:"#app",
+                data:{
+                    isShow:true,
+                    borderWidth:50,
+                    paddingWidth:30,
+                    styleObj:{
+                        width:"200px",
+                        height:"500px",
+                        padding:"50px",
+                        'background-color':'skyblue'
+                    },
+                    styleArr:[
+                        {
+                            width:"200px",
+                            height:"500px",
+                            padding:"50px",
+                            'background-color':'skyblue'
+                        },{
+                            border:"30px solid yellow"
+                        }
+                    ]
+                },
+                methods:{
+                    toggleMenu:function(){
+                        this.isShow=!this.isShow
+                    }
+                },
+                computed:{
+
+                },
+                watch:{
+
+                }
+            })
+        </script>
+    </body>
+</html>

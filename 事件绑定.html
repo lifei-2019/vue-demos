@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title></title>
+
+        <style type="text/css">
+        </style>
+
+        <script src="js/vue.js" type="text/javascript" charset="UTF-8"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h1>点击次数：{{count}}</h1>
+            <!-- 可以使用表达式完成事件操作 -->
+            <button type="button" @click="count++">click</button>
+            <!-- 获取事件对象 -->
+            <button @click="clickEvent">点击</button>
+            </br>
+
+
+            <!-- 事件传参 -->
+            <ul>
+                <li v-for="item,index in stars" @click="clickEvent(index,item,$event)">
+                    索引值：{{index}}----内容：{{item}}
+                </li>
+            </ul>
+            <!-- 事件修饰符
+                .stop阻止冒泡事件向上传递
+                .prevent阻止默认事件
+                .once只触发一次
+                等等直接加在@click后面 -->
+            <form action="" method="POST">
+                <input type="text" name="username" v-model="city" id=""/>
+                <input @click.prevent="searchWeather" type="submit" value="tijiao" />
+            </form>
+            
+            <h1>{{tmp}}</h1>
+        </div>
+
+
+        <script>
+            var app=new Vue({
+                el:"#app",
+                data:{
+                    count:0,
+                    stars:[
+                        'cxk','ab','lc'
+                    ],
+                    city:"广州",
+                    tmp:"",
+
+                },
+                methods:{
+                    clickEvent:function(index,item,event){
+                        console.log(index)
+                        console.log(event)
+                    },
+                    searchWeather:async function(){
+                        console.log("查询天气")
+                        console.log(this.city)
+                        let httpUrl=`https://free-api.heweather.net/s6/weather/now?location=${this.city}&key=dce8664a21e64ca895727f1708270918`
+                        let res=await fetch(httpUrl)
+                        let result=await res.json()
+                        console.log(result)
+                        let now = result.HeWeather6[0].now
+                        this.tmp=now.tmp
+                    }
+                },
+                computed:{
+
+                },
+                watch:{
+
+                }
+            })
+        </script>
+    </body>
+</html>

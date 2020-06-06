@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>todoList</title>
+        <link rel="stylesheet" type="text/css" href="css/animate.min.css" />
+        <script src="js/vue.js" type="text/javascript" charset="UTF-8"></script>
+    </head>
+    
+    <body>
+        <div id="app">
+            <input v-model="inputValue" @keydown.enter="enterEvent" placeholder="请输入待办">
+            <div>正在进行</div>
+            <transition-group name="list" enter-active-class="animated tada" leave-active-class="animated bounceOutRight">
+            <div v-for="item,index in doingList" :key="item.id">
+                <input type="checkbox" @click.prevent="checkDone(item.id)" :data-id="item.id">{{item.content}} <button @click="deleteItem(item.id)">删除</button>
+            </div>
+            </transition-group>
+
+            <div>已完成</div>
+            <div v-for="item,index in doneList" :key="item.id">
+                <input type="checkbox" @click.prevent="checkDone(item.id)" :data-id="item.id" checked="checked">{{item.content}} <button @click="deleteItem(item.id)">删除</button>
+            </div>
+        </div>
+
+
+        <script>
+            var app=new Vue({
+                el:"#app",
+                data:{
+                    todoList:[],
+                    inputValue:"",
+                    id:""
+                },
+                methods:{
+                    enterEvent:function(event){
+                        //把数据添加到todoList
+                        this.todoList.push({
+                            content:this.inputValue,
+                            isDone:false,
+                            id:this.todoList.length
+                        })
+                        //保存到本地存储
+                        this.saveData()
+                        //清楚输入框的值
+                        this.inputValue=""
+                    },
+                    //把数据保存到本地存储
+                    saveData:function(){
+                        localStorage.todoList = JSON.stringify(this.todoList)
+                    },
+                    checkDone:function(id){
+                        this.todoList[id].isDone = !this.todoList[id].isDone
+                        // 每次修改必须保存
+                        this.saveData()
+                        
+                    },
+                    deleteItem:function(id){
+                        this.todoList.splice(id,1)
+                        this.todoList.forEach(function(item,i){
+                            item.id=i
+                            }
+                        )
+                        this.saveData()
+                    },
+                },
+                computed:{
+                    doingList:function(){
+                        let arr = this.todoList.filter(function(item,index){
+                            return !item.isDone
+                        })
+                        return arr
+                    },
+                    doneList:function(){
+                        let arr = this.todoList.filter(function(item,index){
+                            return item.isDone
+                        })
+                        return arr
+                    }
+                },
+                watch:{
+
+                },
+                mounted:function(){
+                    this.todoList = localStorage.todoList?JSON.parse(localStorage.todoList):[]
+                }
+            })
+        </script>
+    </body>
+</html>

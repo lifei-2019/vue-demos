@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title></title>
+
+        <style type="text/css">
+        </style>
+
+        <script src="../js/vue.js" type="text/javascript" charset="UTF-8"></script>
+    </head>
+    <body>
+        <div id="app">
+            <school school-name="南京邮电大学"></school>
+            <school :school-name="'南京邮电大学'"></school>
+            <school :school-name="schoolList[0]"></school>
+            <school v-for="item,index in schoolList" :key="index" :index="index" :school-name="item"></school>
+        </div>
+
+
+        <script>
+            Vue.component("school",{
+                props:['schoolName','index'],
+                template:`
+                    <li>
+                        <h3>{{index}}--学校名称：{{schoolName}}</h3>
+                    </li>
+                `
+            })
+            var app=new Vue({
+                el:"#app",
+                data:{
+                    schoolList:['清华','北大','上交']
+                },
+                methods:{
+
+                },
+                computed:{
+
+                },
+                watch:{
+
+                }
+            })
+        </script>
+    </body>
+</html>

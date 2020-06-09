@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title></title>
+
+        <style type="text/css">
+        </style>
+
+        <script src="../js/vue.js" type="text/javascript" charset="UTF-8"></script>
+    </head>
+    <body>
+        <div id="app">
+            <school v-for="item,index in schoolList" @cschool='changeEvent' :key="index" :index="index" :school-name="item"></school>
+
+            <h2>选中的学校是：{{chooseschool}}</h2>
+        </div>
+
+
+        <script>
+            //产品组件
+            Vue.component("school",{
+                props:['schoolName','index'],
+                template:`
+                    <li>
+                        <h3>{{index}}--学校名称：{{schoolName}}</h3>
+                        <button @click="chooseEvent(schoolName)">选择学校</button>
+                    </li>
+                `,
+                methods:{
+                    chooseEvent:function(item){
+                        console.log(item)
+                        //想要将子元素的数据传递给父元素
+                        //触发一个事件名称叫cSchool
+                        this.$emit('cschool',item)
+                    }
+                }
+            })
+
+            //根组件
+            var app=new Vue({
+                el:"#app",
+                data:{
+                    schoolList:['清华','北大','上交'],
+                    chooseschool:""
+                },
+                methods:{
+                    changeEvent:function(data){
+                        console.log('触发事件')
+                        this.chooseschool=data
+                    }
+
+                },
+                computed:{
+
+                },
+                watch:{
+
+                }
+            })
+        </script>
+    </body>
+</html>

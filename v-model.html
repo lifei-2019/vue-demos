@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title></title>
+
+        <style type="text/css">
+        </style>
+
+        <script src="js/vue.js" type="text/javascript" charset="UTF-8"></script>
+    </head>
+    <body>
+        <div id="app">
+            <!-- <input type="text" v-model="username" value="" /> -->
+            <!-- <input type="text" @input="username = $event.target.value" :value="username" > -->
+            <son :username ="uname"></son>
+            <h3>{{uname}}</h3>
+        </div>
+
+
+        <script type="text/javascript">
+            Vue.component('son',{
+                props:['username'],
+                template:`<input type="text" :value="username" />`,
+            })
+
+            var app=new Vue({
+                el:"#app",
+                data:{
+                    uname:"",
+                },
+                methods:{
+
+                },
+                computed:{
+
+                },
+                watch:{
+
+                }
+            })
+        </script>
+    </body>
+</html>

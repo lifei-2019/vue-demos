@@ -1,0 +1,34 @@
+<script src="jquery.js"></script>
+<script>
+
+    //js里是window.onload = function() {}
+
+    //这种事文档加载完毕，图片不加载，也可以写作$(function({}))
+    $(docunment).ready(function(){
+        //根据标签名获取元素，等同于getElementsByTagName
+        var jQbtn = $("button")
+        var jQdiv = $("div")
+        //根据id属性获取元素
+        $("#app")
+        //根据class获取 等同于getElementsByClassName
+
+
+        //绑定事件
+        jQbtn.click(function(){
+            jQdiv.show(1000);//显示盒子
+            jQbtn.html("tomorrow") //设置内容
+
+            //合在一起链式编程jQdiv.shoow(300).html(111)
+        })
+    })
+
+//文档加载完，图片也加载完毕再执行
+//$(window).ready(function(){})
+</script>
+
+
+类选择器 jqBox1.css("background", "yellow"
+层级选择器var jqOtherLi = $("ul>li")只要儿子一代  jqLi = $("ul li")后代所有都要
+基本过滤选择器$("li:odd") :even :eq :
+筛选选择器find(selector); 从jquery对象的后代中查找 chidlren(selector); 从jquery对象的子代中查找eq(索引值); 从jquery对象的子代中查找该索引值的元素
+

@@ -14,7 +14,9 @@
         <div id="app">
             <!-- <input type="text" v-model="username" value="" /> -->
             <!-- <input type="text" @input="username = $event.target.value" :value="username" > -->
-            <son :username ="uname"></son>
+            <son :username ="uname" @child-input="changeEvent"></son>
+            <son :username ="uname" @child-input="uname=$event"></son>
+            <son :username ="uname" @input="uname=$event"></son>
             <h3>{{uname}}</h3>
         </div>
 
@@ -22,7 +24,7 @@
         <script type="text/javascript">
             Vue.component('son',{
                 props:['username'],
-                template:`<input type="text" :value="username" />`,
+                template:`<input type="text" @input="$emit('child-input',$event.target.value)" :value="username" />`,
             })
 
             var app=new Vue({
@@ -31,7 +33,9 @@
                     uname:"",
                 },
                 methods:{
-
+                    changeEvent:function(data){
+                        this.uname = data
+                    }
                 },
                 computed:{
 

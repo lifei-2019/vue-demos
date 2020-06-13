@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title></title>
+
+        <style type="text/css">
+        </style>
+
+        <script src="js/vue.js" type="text/javascript" charset="UTF-8"></script>
+    </head>
+    <body>
+        <div id="app">
+            <demo1>
+                <template v-slot:one>这是我插入的1</template>
+                <template #username="{ user = { name: 'Guest' } }">{{user.name}}</template>
+            </demo1>
+            <!-- 这种也可以 -->
+            <demo1 #username="{ user = { name: 'Guest' } }">{{user.name}}</demo1>
+        </div>
+
+
+        <script>
+            Vue.component("demo1",{
+                
+                template:
+                `<div>
+                <button type="submit">
+                    <slot name=default>Submit</slot>
+                </button>
+                <slot name="one"><a>这是默认值1</a></slot>
+                <slot name="username"></slot>
+                </div>`
+            })
+            var app=new Vue({
+                el:"#app",
+                data:{
+                },
+                methods:{
+
+                },
+                computed:{
+
+                },
+                watch:{
+
+                },
+            })
+        </script>
+    </body>
+</html>

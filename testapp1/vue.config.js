@@ -1,3 +1,5 @@
 module.exports = {
-  outputDir: 'distlf'
+  outputDir: 'distlf',
+  publicPath: './',
+  devServer: "8080"
 }

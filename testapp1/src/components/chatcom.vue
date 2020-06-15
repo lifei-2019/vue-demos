@@ -37,7 +37,7 @@ export default {
     sendEvent:function (value) {
       this.chatlist.push({
         user:this.$root.$children[0].currentuser,
-          chatcontent: value+new Date()
+        chatcontent: value+new Date()
       })
     }
   }

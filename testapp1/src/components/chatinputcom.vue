@@ -17,7 +17,6 @@ export default {
   methods:{
     send:function() {
       this.sendEvent(this.inputContent)
-      this.inputContent
     }
   }
   
